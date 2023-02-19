@@ -8,7 +8,6 @@ import random
 
 today = datetime.now()
 start_date = os.environ['START_DATE']
-wed_date = os.environ['WED_DATE']
 city = os.environ['CITY']
 birthday = os.environ['BIRTHDAY']
 
@@ -31,7 +30,7 @@ def get_count():
   return delta.days
 
 def get_wed_count():
-  delta = today - datetime.strptime(wed_date, "%Y-%m-%d")
+  delta = today - datetime.strptime('2021-06-01', "%Y-%m-%d")
   return delta.days
 
 
