@@ -2,6 +2,7 @@ from datetime import date, datetime
 import math
 from wechatpy import WeChatClient
 from wechatpy.client.api import WeChatMessage, WeChatTemplate
+from datetime import datetime
 import requests
 import os
 import random
@@ -16,6 +17,8 @@ app_secret = os.environ['APP_SECRET']
 
 user_id = os.environ['USER_ID']
 template_id = os.environ['TEMPLATE_ID']
+
+week_list = ["星期一","星期二","星期三","星期四","星期五","星期六","星期日"]
 
 
 def get_weather():
@@ -55,6 +58,6 @@ client = WeChatClient(app_id, app_secret)
 wm = WeChatMessage(client)
 wea, temperature,lowest,highest = get_weather()
 
-data = {"weather":{"value":wea},"temperature":{"value":temperature},"lowest":{"value":lowest},"highest":{"value":highest},"love_days":{"value":get_count()},"wed_days":{"value":get_wed_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
+data = {"date":{"value":week_list[datetime.today().weekday()]}"weather":{"value":wea},"temperature":{"value":temperature},"lowest":{"value":lowest},"highest":{"value":highest},"love_days":{"value":get_count()},"wed_days":{"value":get_wed_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}}
 res = wm.send_template(user_id, template_id, data)
 print(res)
